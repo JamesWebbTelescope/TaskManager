@@ -18,9 +18,9 @@ def create_api(
 
     use_swagger = "/docs" if swagger_ui else False
     api = Api(
-        title= "Raspberry Pi Tutorial API",
+        title= "Task Manager API",
         version= "1.0",
-        description= "Raspberry Pi Tutorial API",
+        description= "Task Manager API",
         doc= use_swagger
     )
 
