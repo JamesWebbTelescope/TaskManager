@@ -1,0 +1,10 @@
+{
+    "db_name": "tutorials",
+    "db_host": "raspberrypi.local",
+    "db_user": "viktor",
+    "db_password": "raspberry",
+    "debug": true,
+    "swagger_ui": true,
+    "api_host": "0.0.0.0",
+    "api_port": 8000
+}
