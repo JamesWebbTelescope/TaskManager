@@ -1,6 +1,6 @@
 from flask import Flask, Response, request, send_from_directory
 from werkzeug.middleware.proxy_fix import ProxyFix
-from apis import create_api#, jwt
+from apis import create_api, jwt
 from database_commands.database_manager import DatabaseManager
 #from database_commands.product import ProductModel
 from core.config import Config, ReadConfigFile
@@ -45,7 +45,7 @@ def create_app():
     app.wsgi_app = ProxyFix(app.wsgi_app) #Create the application
     CORS(app, origins=ALLOWED_ORIGINS, supports_credentials=True, send_wildcard=True) 
 
-    #app.config["JWT_SECRET_KEY"] = config.jwt_token
+    app.config["JWT_SECRET_KEY"] = config.jwt_token
     app.config["DEBUG"] = config.debug
     app.config["SWAGGER_UI"] = config.swagger_ui
     app.config["API_HOST"] = config.api_host
@@ -74,10 +74,10 @@ def create_app():
     api.init_app(app,docs=config.swagger_ui)
 
     # json webtoken manager
-    #jwt.init_app(app)
+    jwt.init_app(app)
     
     #setup admin user
-    #create_admin_user(dbManger)
+    create_admin_user(dbManger)
     
 
     return app
