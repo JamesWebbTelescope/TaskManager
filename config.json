@@ -1,5 +1,5 @@
 {
-    "db_name": "tutorials",
+    "db_name": "tasks",
     "db_host": "raspberrypi.local",
     "db_user": "viktor",
     "jwt_token": "sLc685I741kB7tUjyUZdI8CmYXwdOeIJvksNLmOENRfATmkrc9-eq2m7_ABc3BFYL9MjCUC6CapJx44sXEnRFA",
