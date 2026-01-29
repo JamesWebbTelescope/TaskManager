@@ -63,9 +63,9 @@ def create_app():
 
     # create the api
     api = create_api(
-        title="Raspberry Pi Tutorials API",
+        title="Task Manager API",
         version="1.0",
-        description="Raspberry Pi Tutorials API",
+        description="Task Manager API",
         swagger_ui=config.swagger_ui,
         db_manager=dbManger
     )
