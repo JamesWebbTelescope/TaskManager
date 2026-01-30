@@ -9,7 +9,7 @@ class Config:
     db_host: str
     db_user: str
     db_password: str
-    #jwt_token: str
+    jwt_token: str
     debug: bool
     swagger_ui: bool
     api_host: str
@@ -26,7 +26,7 @@ def ReadConfigFile(filename): #Get the configuration from the configuration file
                 db_host=data['db_host'],
                 db_password=data['db_password'],
                 db_user=data['db_user'],
-                #jwt_token=data['jwt_token'],
+                jwt_token=data['jwt_token'],
                 debug=data['debug'],
                 swagger_ui=data['swagger_ui'],
                 api_host=data['api_host'],
