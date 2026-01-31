@@ -10,7 +10,7 @@ class AdminModel:
         try:
             conn = self.db.get_connection()
             with conn.cursor() as cursor:
-                cursor.execute("SELECT * FROM tutorials.admin")
+                cursor.execute("SELECT * FROM tasks.admin")
                 myresult = cursor.fetchall()
                 results = [] 
                 for u in myresult:
@@ -26,7 +26,7 @@ class AdminModel:
         try:
             conn = self.db.get_connection()
             with conn.cursor() as cursor:
-                cursor.execute(f"SELECT * FROM admin where adminid = %s ", (id,))
+                cursor.execute(f"SELECT * FROM tasks.admin where adminid = %s ", (id,))
                 myresult = cursor.fetchall()
                 user = AdminModel._TupleToDict(myresult[0])
                 return user
@@ -40,7 +40,7 @@ class AdminModel:
             n_id = -1
             conn = self.db.get_connection()
             with conn.cursor() as cursor:
-                query = "INSERT INTO admin (navn, adminpassword) VALUES (%s, %s)"
+                query = "INSERT INTO tasks.admin (name, password) VALUES (%s, %s)"
                 cursor.execute(query, (name, password_hash))
                 n_id = cursor.lastrowid
             conn.commit()
@@ -58,9 +58,9 @@ class AdminModel:
             conn = self.db.get_connection()
             with conn.cursor() as cursor:
                 query = """
-                    UPDATE admin
-                    SET navn = %s, adminpassword = %s                    
-                    WHERE adminid = %s
+                    UPDATE tasks.admin
+                    SET name = %s, password = %s                    
+                    WHERE id = %s
                 """
                 cursor.execute(query, (name, password_hash, admin_id))
             conn.commit()
@@ -79,7 +79,7 @@ class AdminModel:
         try:
             conn = self.db.get_connection()
             with conn.cursor() as cursor:
-                query = "UPDATE admin SET navn = %s WHERE adminid = %s"
+                query = "UPDATE tasks.admin SET name = %s WHERE id = %s"
                 cursor.execute(query, (new_name, admin_id))
             conn.commit()
             return True
@@ -92,19 +92,19 @@ class AdminModel:
         try:
             conn = self.db.get_connection()
             with conn.cursor() as cursor:
-                query = "UPDATE admin SET adminpassword = %s WHERE adminid = %s"
+                query = "UPDATE tasks.admin SET password = %s WHERE id = %s"
                 cursor.execute(query, (password_hash, admin_id))
             conn.commit()
             return True
         except Exception as e:
-            print("Error checking if product exist by id:", e)
+            print("Error updating admin password:", e)
             return False
 
     def Delete(self, admin_id):
         try:
             conn = self.db.get_connection()
             with conn.cursor() as cursor:
-                query = "DELETE FROM admin WHERE adminid = %s"
+                query = "DELETE FROM tasks.admin WHERE id = %s"
                 cursor.execute(query, (admin_id,))
             return True
         except Exception as e:

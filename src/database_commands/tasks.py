@@ -2,7 +2,7 @@ import mysql.connector
 import requests
 from requests_html import HTMLSession
 
-class TutorialModel:
+class TaskModel:
 
     def __init__(self, db):
         self.db = db
@@ -19,54 +19,48 @@ class TutorialModel:
                 myresult = cursor.fetchall() #Get the response
                 results = [] 
                 for u in myresult:
-                    results.append(TutorialModel._TupleToDict(u)) #Return the response as a tuple
+                    results.append(TaskModel._TupleToDict(u)) #Return the response as a tuple
                 return results
         except Exception as e:
-            print("Error getting all tutorials", e) #If anything goes wrong, print the error
+            print("Error getting all tasks", e) #If anything goes wrong, print the error
             return False
         
-    def Create(self, name, link):
+    def Create(self, name, description, due_date, status):
         '''
         Docstring for Create
         
         :param name: Name of the tutorial that you want to add
-        :param link: Link for the tutorial that you want to add
+        :param description: Description of the task that you want to add
         '''
         try:
-            response = self.is_valid_url(link) #Check that the link is valid
-            if(response == True): #If it is
-                conn = self.db.get_connection() #Open a connection to the database
-                with conn.cursor() as cursor: #Get a cursor
-                    cursor.execute(f"INSERT INTO tutorials.tutorials (name, link) VALUES('{name}', '{link}')") #Add the new tutorial
-                    myresult = cursor.fetchall()
-                conn.commit() #Commit the connection
-                return True
-            else:
-                return False #If it doesn't work, return False
+            conn = self.db.get_connection() #Open a connection to the database
+            with conn.cursor() as cursor: #Get a cursor
+                cursor.execute(f"INSERT INTO tasks.tasks (name, description, due_date, status) VALUES('{name}', '{description}', '{due_date}', '{status}')") #Add the new tutorial
+                myresult = cursor.fetchall()
+            conn.commit() #Commit the connection
+            return True
         
         except Exception as e: #If anything goes wrong, print the error
-            print("Error adding tutorial", e)
+            print("Error adding task", e)
             return False
     
-    def Update(self, ID, name, link):
+    def Update(self, ID, name, description, due_date, status):
         '''
         Docstring for Update
         
-        :param ID: ID of the tutorial that you wnat to update
-        :param name: New name for the tutorial
-        :param link: New link for the tutorial
+        :param ID: ID of the task that you wnat to update
+        :param name: New name for the task
+        :param description: New description for the task
+        :param due_date: New due date for the task
+        :param status: New status for the task
         '''
         try:
-            response = self.is_valid_url(link) #Check that the link is valid
-            if(response == True):
-                conn = self.db.get_connection() #Open a connection to the database
-                with conn.cursor() as cursor: #Open a cursor
-                    cursor.execute(f"UPDATE tutorials SET name = '{name}', link = '{link}' WHERE tutorialID = {ID}") #Update the desired tutorial with the given name and link
-                    myresult = cursor.fetchall() #Get the response
-                conn.commit() #Close the connection
-                return True
-            else:
-                return False
+            conn = self.db.get_connection() #Open a connection to the database
+            with conn.cursor() as cursor: #Open a cursor
+                cursor.execute(f"UPDATE tasks.tasks SET name = '{name}', description = '{description}', due_date = '{due_date}', status = '{status}' WHERE id = {ID}") #Update the desired task with the given name and link
+                myresult = cursor.fetchall() #Get the response
+            conn.commit() #Close the connection
+            return True
         except Exception as e: #If anything goes wrong, print the error
             print("Error updating tutorial", e)
             return False
@@ -80,41 +74,21 @@ class TutorialModel:
         try:
             conn = self.db.get_connection() #Open a connection to the database
             with conn.cursor() as cursor: #Open a cursor
-                cursor.execute(f"UPDATE tutorials SET name = '', link = '' WHERE tutorialID = {ID}") #Delete name and link for the tutorial
+                cursor.execute(f"UPDATE tasks.tasks SET name = '', description = '', due_date = '', status = 'deleted' WHERE id = {ID}") #Delete name and link for the task
                 myresult = cursor.fetchall()
             conn.commit() #Close the connection
             return True
         except Exception as e: #If anything goes wrong, print the error
-            print("Error updating student", e)
+            print("Error deleting task", e)
             return False
         
-    def is_valid_url(self, link):
-        try:
-            response = requests.head(link, allow_redirects=True, timeout=5) #Any valid URL will have a head, so if the website returns a head, that means that it is valid
-            return True
-        except requests.exceptions.MissingSchema:
-            # Raised if the URL is malformed (e.g., missing http/https)
-            print("Invalid URL: Missing schema (e.g., http or https).")
-            return False
-        except requests.exceptions.ConnectionError:
-            # Raised if the URL's domain is unreachable
-            print("Invalid URL: Unable to connect to the server.")
-            return False
-        except requests.exceptions.Timeout:
-            # Raised if the request times out
-            print("Invalid URL: Request timed out.")
-            return False
-        except requests.exceptions.RequestException as e:
-            # Catch-all for other request-related exceptions
-            print(f"Invalid URL: {e}")
-            return False
-        except requests.exceptions.HTTPError as e:
-            print(f"Something went wrong: {e}")
-            return False
+    
     
     def _TupleToDict(tuple):
         return {
                 "ID": tuple[0],
                 "name": tuple[1],
-                "link": tuple[2]
+                "description": tuple[2],
+                "due_date": tuple[3],
+                "status": tuple[4]
             }
