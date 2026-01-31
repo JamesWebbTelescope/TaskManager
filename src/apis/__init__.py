@@ -1,6 +1,6 @@
 from flask_restx import Api
 from apis.auth import create_api_auth, jwt
-from src.apis.tasks import create_api_tasks
+from apis.tasks import create_api_tasks
 #from apis.products import create_api_product
 #from apis.warehouse import create_api_warehouse
 #from apis.customer import create_api_customer

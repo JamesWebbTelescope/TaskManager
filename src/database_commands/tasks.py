@@ -25,7 +25,7 @@ class TaskModel:
             print("Error getting all tasks", e) #If anything goes wrong, print the error
             return False
         
-    def Create(self, name, description, due_date, status):
+    def Create(self, name, description, due_date, is_done):
         '''
         Docstring for Create
         
@@ -35,7 +35,7 @@ class TaskModel:
         try:
             conn = self.db.get_connection() #Open a connection to the database
             with conn.cursor() as cursor: #Get a cursor
-                cursor.execute(f"INSERT INTO tasks.tasks (name, description, due_date, status) VALUES('{name}', '{description}', '{due_date}', '{status}')") #Add the new tutorial
+                cursor.execute(f"INSERT INTO tasks.tasks (name, description, due_date, is_done) VALUES('{name}', '{description}', '{due_date}', '{is_done}')") #Add the new tutorial
                 myresult = cursor.fetchall()
             conn.commit() #Commit the connection
             return True
@@ -44,7 +44,7 @@ class TaskModel:
             print("Error adding task", e)
             return False
     
-    def Update(self, ID, name, description, due_date, status):
+    def Update(self, ID, name, description, due_date, is_done):
         '''
         Docstring for Update
         
@@ -57,7 +57,7 @@ class TaskModel:
         try:
             conn = self.db.get_connection() #Open a connection to the database
             with conn.cursor() as cursor: #Open a cursor
-                cursor.execute(f"UPDATE tasks.tasks SET name = '{name}', description = '{description}', due_date = '{due_date}', status = '{status}' WHERE id = {ID}") #Update the desired task with the given name and link
+                cursor.execute(f"UPDATE tasks.tasks SET name = '{name}', description = '{description}', due_date = '{due_date}', is_done = '{is_done}' WHERE id = {ID}") #Update the desired task with the given name and link
                 myresult = cursor.fetchall() #Get the response
             conn.commit() #Close the connection
             return True
@@ -74,7 +74,7 @@ class TaskModel:
         try:
             conn = self.db.get_connection() #Open a connection to the database
             with conn.cursor() as cursor: #Open a cursor
-                cursor.execute(f"UPDATE tasks.tasks SET name = '', description = '', due_date = '', status = 'deleted' WHERE id = {ID}") #Delete name and link for the task
+                cursor.execute(f"UPDATE tasks.tasks SET name = '', description = '', due_date = '', is_done = '' WHERE id = {ID}") #Delete name and link for the task
                 myresult = cursor.fetchall()
             conn.commit() #Close the connection
             return True
@@ -86,9 +86,9 @@ class TaskModel:
     
     def _TupleToDict(tuple):
         return {
-                "ID": tuple[0],
-                "name": tuple[1],
-                "description": tuple[2],
-                "due_date": tuple[3],
-                "status": tuple[4]
+                "name": tuple[0],
+                "description": tuple[1],
+                "due_date": tuple[2],
+                "is_done": tuple[3],
+                "ID": tuple[4]
             }

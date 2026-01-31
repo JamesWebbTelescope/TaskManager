@@ -2,15 +2,15 @@ from flask_restx import Namespace, Resource, fields, Model
 from flask import request, jsonify
 from apis.auth import authorizations
 
-def create_api_tutorials(db_manager):
+def create_api_tasks(db_manager):
 
     api: Namespace = Namespace("tasks", description="task namespace", authorizations=authorizations)
 
-    task_model: Model = api.model("Tasks", {'ID': fields.Integer(required=True, description="The task ID"),
-                                                    'name': fields.String(required=True, description="Name of the task"),
+    task_model: Model = api.model("Tasks", {'name': fields.String(required=True, description="Name of the task"),
                                                     'description': fields.String(required=True, description="Description of the task"),
                                                     'due_date': fields.String(required=True, description="Due date of the task"),
-                                                    'status': fields.String(required=True, description="Status of the task")})
+                                                    'is_done': fields.String(required=True, description="Is the task done?"),
+                                                    'ID': fields.Integer(required=True, description="The task ID")})
     
     delete_task_model: Model = api.model("Delete task", {'ID': fields.Integer(required=True, description="The task ID")})
 
@@ -28,9 +28,9 @@ def create_api_tutorials(db_manager):
             name = api.payload['name']
             description = api.payload['description']
             due_date = api.payload['due_date']
-            status = api.payload['status']
-            tutorials = db_manager.tasks.Create(name, description, due_date, status)
-            return tutorials, 200
+            is_done = api.payload['is_done']
+            tasks = db_manager.tasks.Create(name, description, due_date, is_done)
+            return tasks, 200
         
         @api.doc("Update tasks")
         @api.expect(task_model)
@@ -39,16 +39,16 @@ def create_api_tutorials(db_manager):
             name = api.payload['name']
             description = api.payload['description']
             due_date = api.payload['due_date']
-            status = api.payload['status']
-            tutorials = db_manager.tasks.Update(ID, name, description, due_date, status)
-            return tutorials, 200
+            is_done = api.payload['is_done']
+            tasks = db_manager.tasks.Update(ID, name, description, due_date, is_done)
+            return tasks, 200
         
         @api.doc("Delete tasks")
         @api.expect(delete_task_model)
         def delete(self):
             ID = api.payload['ID']
-            tutorials = db_manager.tasks.Delete(ID)
-            return tutorials, 200
+            tasks = db_manager.tasks.Delete(ID)
+            return tasks, 200
 
         
     return api

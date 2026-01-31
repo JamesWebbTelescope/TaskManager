@@ -1,6 +1,6 @@
 import mysql.connector
 from database_commands.admin import AdminModel
-from database_commands.tasks import TutorialModel
+from database_commands.tasks import TaskModel
 
 class DatabaseManager:
     def __init__(self, host, user, password, dbname):
@@ -21,7 +21,7 @@ class DatabaseManager:
         self.mydb = None
 
         self.admin = AdminModel(self)
-        self.tutorials = TutorialModel(self)
+        self.tasks = TaskModel(self)
 
         try:
             self.get_connection() #Try ot open a connection
