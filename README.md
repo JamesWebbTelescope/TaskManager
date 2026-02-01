@@ -1,2 +1,89 @@
 # TaskManager
 Python-based RESTful API for task management
+## Description
+
+This is a RESTful API utilizing a MySQL server to simulate keeping track of tasks and task statuses. 
+
+## Getting Started
+
+### Dependencies
+
+* Windows 11
+* Visual Studio Code 2022
+* Python 3.13
+* MySQL Server
+
+### Installing
+#### Config
+Fill out the `config.json` file
+
+#### Backend
+* Download the code as a .zip-folder.
+* Navigate to the folder, where you downloaded it.
+* Open a Python terminal.
+* In the terminal, create a virtual environment:
+  ```
+  python -m venv .venv
+  ```
+* Once that has been done, activate the virtual environment:
+```
+.\.venv\Scripts\Activate.ps1
+```
+* When the virtual environment has been activated, run this command:
+```
+pip install -r requirements.txt
+```
+* This will install all the necessary libraries for running the program
+
+
+
+#### Frontend
+* Install node.js.
+* Go to `lager-frontend` dir.
+* Run commands
+```
+npm install
+npm run build
+```
+### Executing program
+
+* In Visual Studio Code:
+* Open the file __init__.py.
+* Run the file by pressing F5 on your keyboard.
+* In the terminal, if everything works, you will see a line saying "Running on http://###.#.#.#:5000". Copy this address into your preferred web browser and write "/docs" at the end, so it looks like this: http://###.#.#.#:8000/docs
+* Press Enter to go to the website.
+* Right now, the website is under development. Because of this, you will see two namespaces: auth and product.
+```
+python src/app.py
+```
+
+
+### Tests
+This project is optimized for unit tests, but no unit tests have been written.
+
+## Help
+
+We don't have any help files for this project yet.
+
+## Authors
+
+Contributors names and contact info
+
+Viktor Hugo Hersom From
+[@jameswebbtelescope](https://github.com/JamesWebbTelescope)
+
+## Version History
+
+* 1.0
+* * Development version including authentication and product endpoints
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE.md file for details
+
+## Acknowledgments
+
+Inspiration, code snippets, etc.
+* https://www.geeksforgeeks.org/python/how-to-run-a-flask-application/
+* https://github.com/JamesWebbTelescope/uge-3
+
