@@ -42,11 +42,14 @@ def create_api_auth(db_manager):
         def post(self):            
             users = db_manager.admin.GetAll()
             user = next((u for u in users if u["name"] == api.payload["username"]), None)
+            print(generate_password_hash(api.payload["password"]))
+            print(user)
 
             status : bool = True
             if user is None:
                 status = False
             elif not check_password_hash(user["password_hash"],api.payload["password"]):
+                print(user["password_hash"])
                 status = False
 
             if not status:

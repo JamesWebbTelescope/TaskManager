@@ -26,7 +26,7 @@ class AdminModel:
         try:
             conn = self.db.get_connection()
             with conn.cursor() as cursor:
-                cursor.execute(f"SELECT * FROM tasks.admin where adminid = %s ", (id,))
+                cursor.execute(f"SELECT * FROM tasks.admin where id = %s ", (id,))
                 myresult = cursor.fetchall()
                 user = AdminModel._TupleToDict(myresult[0])
                 return user
@@ -114,8 +114,8 @@ class AdminModel:
 
     def _TupleToDict(tuple):        
             return {
-                "id": tuple[0],
-                "name": tuple[1],
-                "password_hash": tuple[2]
+                "name": tuple[0],
+                "password_hash": tuple[1],
+                "id": tuple[2],
             }
         

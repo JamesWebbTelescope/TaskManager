@@ -1,3 +1,4 @@
+from flask_jwt_extended import jwt_required
 from flask_restx import Namespace, Resource, fields, Model
 from flask import request, jsonify
 from apis.auth import authorizations
@@ -22,7 +23,8 @@ def create_api_tasks(db_manager):
             tasks = db_manager.tasks.GetAll()
             return tasks, 200
         
-        @api.doc("Add new task")
+        @jwt_required()
+        @api.doc("Add new task", security="jsonWebToken")
         @api.expect(task_model)
         def post(self):
             name = api.payload['name']
@@ -32,7 +34,8 @@ def create_api_tasks(db_manager):
             tasks = db_manager.tasks.Create(name, description, due_date, is_done)
             return tasks, 200
         
-        @api.doc("Update tasks")
+        @jwt_required()
+        @api.doc("Update tasks", security="jsonWebToken")
         @api.expect(task_model)
         def put(self):
             ID = api.payload['ID']
@@ -43,7 +46,8 @@ def create_api_tasks(db_manager):
             tasks = db_manager.tasks.Update(ID, name, description, due_date, is_done)
             return tasks, 200
         
-        @api.doc("Delete tasks")
+        @jwt_required()
+        @api.doc("Delete tasks", security="jsonWebToken")
         @api.expect(delete_task_model)
         def delete(self):
             ID = api.payload['ID']
