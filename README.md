@@ -35,7 +35,9 @@ pip install -r requirements.txt
 ```
 * This will install all the necessary libraries for running the program
 
+## Design
 
+This system is intended as a Model-View-ViewModel system, with a MySQL database as the model, a Python-based backend as the viewmodel and a React-based frontend as the view.
 
 #### Frontend
 * Install node.js.
