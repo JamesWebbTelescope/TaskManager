@@ -1,6 +1,7 @@
 import unittest
 import database_commands.database_manager as db_manager
 import database_commands.tasks as tasks
+import database_commands.admin as admin
 
 class TestDatabaseManager(unittest.TestCase):
 
@@ -24,6 +25,22 @@ class TestDatabaseManager(unittest.TestCase):
 
     def test_delete_task(self):
         self.assertEqual(tasks.TaskModel.Delete(self, 1), True)
+
+    def test_get_admin_by_id(self):
+        admin_user = admin.AdminModel.GetById(self, 1)
+        self.assertIsInstance(admin_user, dict)
+    
+    def test_get_all_admins(self):
+        all_admins = admin.AdminModel.GetAll(self)
+        self.assertIsInstance(all_admins, list)
+
+    def test_update_admin(self):
+        admin_user = admin.AdminModel.Update(self, 1, 'newadmin', 'newpassword123')
+        self.assertIsInstance(admin_user, dict)
+
+    def test_delete_admin(self):
+        self.assertEqual(admin.AdminModel.Delete(self, 1), True)
+
         
 
 if __name__ == '__main__':
