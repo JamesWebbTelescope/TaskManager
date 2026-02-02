@@ -24,7 +24,7 @@ class DatabaseManager:
         self.tasks = TaskModel(self)
 
         try:
-            self.get_connection() #Try ot open a connection
+            self.get_connection() #Try to open a connection
 
         except Exception as e: #If anything goes wrong, print the error
             print(f"Could not connect to database: {dbname}")
