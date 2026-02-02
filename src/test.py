@@ -26,6 +26,10 @@ class TestDatabaseManager(unittest.TestCase):
     def test_delete_task(self):
         self.assertEqual(tasks.TaskModel.Delete(self, 1), True)
 
+    def test_add_admin(self):
+        admin_user = admin.AdminModel.Insert(self, 'admin', 'password123')
+        self.assertIsInstance(admin_user, dict)
+
     def test_get_admin_by_id(self):
         admin_user = admin.AdminModel.GetById(self, 1)
         self.assertIsInstance(admin_user, dict)
@@ -35,7 +39,7 @@ class TestDatabaseManager(unittest.TestCase):
         self.assertIsInstance(all_admins, list)
 
     def test_update_admin(self):
-        admin_user = admin.AdminModel.Update(self, 1, 'newadmin', 'newpassword123')
+        admin_user = admin.AdminModel.Update(self, 1, 'admin', 'newpassword123')
         self.assertIsInstance(admin_user, dict)
 
     def test_delete_admin(self):
