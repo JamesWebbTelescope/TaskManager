@@ -6,8 +6,12 @@ interface LayoutProps {
 
 export function Layout({ children }: LayoutProps) {
   return (
-    <div className="min-h-screen flex flex-col">   
-        <main className="flex-grow container mx-auto p-4">{children}</main>
+    <div className="bg-black text-white">   
+        <h1>
+            <main>
+                {children}
+            </main>
+        </h1>
     </div>
   );
 }   
