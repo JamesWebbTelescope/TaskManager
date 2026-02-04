@@ -59,10 +59,10 @@ class AdminModel:
             with conn.cursor() as cursor:
                 query = """
                     UPDATE tasks.admin
-                    SET name = %s, password = %s                    
+                    SET name = %s                    
                     WHERE id = %s
                 """
-                cursor.execute(query, (name, password_hash, admin_id))
+                cursor.execute(query, (name, admin_id))
             conn.commit()
 
             return {

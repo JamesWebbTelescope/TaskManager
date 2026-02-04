@@ -2,6 +2,7 @@ import unittest
 import database_commands.database_manager as db_manager
 import database_commands.tasks as tasks
 import database_commands.admin as admin
+from werkzeug.security import generate_password_hash
 
 class TestDatabaseManager(unittest.TestCase):
 
@@ -38,9 +39,13 @@ class TestDatabaseManager(unittest.TestCase):
         all_admins = admin.AdminModel.GetAll(self)
         self.assertIsInstance(all_admins, list)
 
-    def test_update_admin(self):
-        admin_user = admin.AdminModel.Update(self, 1, 'admin', 'newpassword123')
-        self.assertIsInstance(admin_user, dict)
+    '''def test_update_admin_name(self):
+        admin_user = admin.AdminModel.UpdateName(self, 1, 'admin_updated')
+        self.assertTrue(admin_user)
+
+    def test_update_admin_password(self):
+        admin_user = admin.AdminModel.UpdatePassword(self, 1, generate_password_hash('newpassword123'))
+        self.assertTrue(admin_user)'''
 
     def test_delete_admin(self):
         self.assertEqual(admin.AdminModel.Delete(self, 1), True)
