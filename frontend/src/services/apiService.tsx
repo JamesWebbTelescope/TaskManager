@@ -1,0 +1,21 @@
+import type { Task } from '../types/types';
+
+export const getTasks = async (url: string) => {
+    try {   
+            const response = await fetch(url);
+            const data = await response.json();
+            const tasks: Array<Task> = []
+            for (let i = 0; i < data.length; i++) {
+                const task: Task = {} as Task;
+                task.title = data[i].title;
+                task.description = data[i].description;
+                task.completed = data[i].completed;
+                task.id = data[i].id;
+                tasks.push(task);
+            }
+            return Array.isArray(tasks) ? tasks: []
+} catch (error) { 
+        console.error("Error fetching tasks:", error);
+        return [];
+    }
+}
