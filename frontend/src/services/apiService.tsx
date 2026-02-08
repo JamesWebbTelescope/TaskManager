@@ -1,4 +1,4 @@
-import type { Task } from '../types/types';
+import type { Task } from '../types/Types';
 
 export const getTasks = async (url: string) => {
     try {   
