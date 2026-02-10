@@ -1,9 +1,9 @@
 {
-  "name": "task-manager",
+  "name": "taskmanager",
   "private": false,
   "version": "0.1.0",
   "type": "module",
-  "homepage": "https://jameswebbtelescope.github.io/TaskManager/",
+  "homepage": "https://jameswebbtelescope.github.io/RasbiTuts/",
   "scripts": {
     "dev": "vite",
     "predeploy": "npm run build",
