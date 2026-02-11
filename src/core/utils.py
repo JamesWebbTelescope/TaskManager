@@ -1,3 +1,4 @@
+import time
 from werkzeug.security import generate_password_hash, check_password_hash
 
 def parse_int(id_str):
@@ -49,6 +50,7 @@ def create_admin_user(
 
     # Do not create admin:
     # If any users is on db 
+    
     user_list = db_manager.admin.GetAll()    
     if len(user_list) > 0:
         return False
