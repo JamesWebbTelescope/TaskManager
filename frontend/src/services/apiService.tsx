@@ -7,7 +7,7 @@ export const getTasks = async (url: string) => {
             const tasks: Array<Task> = []
             for (let i = 0; i < data.length; i++) {
                 const task: Task = {} as Task;
-                task.title = data[i].title;
+                task.name = data[i].name;
                 task.description = data[i].description;
                 task.is_done = data[i].completed;
                 task.id = data[i].id;

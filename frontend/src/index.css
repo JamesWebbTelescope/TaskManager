@@ -1,13 +1,26 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@import "tailwindcss";
+
+/* Custom gradient animation */
+@keyframes gradient-colors {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+@layer utilities {
+  /* Animated gradient text */
+  .animate-gradient-colors {
+    animation: gradient-colors 5s ease infinite;
+  }
+
+  /* Glow for text */
+  .text-glow {
+    text-shadow: 
+      0 0 10px rgba(52, 205, 25, 0.8),
+      0 0 20px rgba(59,130,246,0.6),
+      0 0 30px rgba(59,130,246,0.4);
+  }
 }

@@ -1,7 +1,6 @@
 import Layout from "../components/Layout";
 import { useState, useEffect} from "react";
 import { getTasks } from "../services/apiService";
-import Dropdown from "react-bootstrap/Dropdown";
 
 interface DisplayTask {
     name: string;
@@ -11,33 +10,8 @@ interface DisplayTask {
     id: number;
 }
 
-const holoLinkClass = `
-    relative
-    px-4 py-2
-    text-green
-    font-semibold
-    rounded-lg
-    transition-all
-    duration-300
-    hover:text-green-400
-    hover:drop-shadow-[0_0_15px_rgba(0,255,255,0.9)]
-    before:absolute
-    before:inset-0
-    before:rounded
-    before:bg-green-400
-    before:opacity-20
-    before:blur-xl
-    before:scale-110
-    before:transition-all
-    before:duration-300
-    hover:before:opacity-50
-    hover:before:scale-80
-    before:pointer-events-none
-  `;
-
 export default function TasksPage() {
     const [tasks, setTaskData] = useState<DisplayTask[]>([])
-    const [display, updateDisplay] = useState(false)
 
     const API_URL = import.meta.env.VITE_API_URL;
     const results: DisplayTask[] = [];
@@ -51,11 +25,11 @@ export default function TasksPage() {
                     const t = tasks.find(item => item.id === task.id);
                     if(t){
                         results.push({
-                                    id: t.id,
                                     name: t.name,
                                     description: t.description,
                                     due_date: t.due_date,
-                                    is_done: t.is_done
+                                    is_done: t.is_done,
+                                    id: t.id
                                 });
                             console.log(t.id)
                             console.log(t.name)
@@ -71,18 +45,28 @@ export default function TasksPage() {
 
     return <Layout>
         <div className="overlay-box relative text-center bg-red-800/70 text-green-300 uppercase text-sm font-semibold tracking-wide">
-            <Dropdown>
-                <Dropdown.Header>Tasks</Dropdown.Header>
+            <table className="min-w-full text-black-200">
+                <thead className="bg-gray-800/70 text-green-300 uppercase text-sm font-semibold tracking-wide">
+                    <tr>
+                    <th className="px-6 py-3 text-left">ID</th>
+                    <th className="px-6 py-3 text-left">Name</th>
+                    <th className="px-6 py-3 text-left">Description</th>
+                    <th className="px-6 py-3 text-left">Status</th>
+                    </tr>
+                </thead>
+                <tbody>
                     {tasks.map((item, index) => (
-                        <Dropdown.Menu show key={index}>
-                        <Dropdown.Item className={holoLinkClass} onClick={() => {
-                                    // clearToken()
-                                    updateDisplay(!display)
-                                }}>{item.name}
-                        </Dropdown.Item>
-                        </Dropdown.Menu>
-                        ))}
-            </Dropdown>
+                    <tr key={index}
+                    className="border-b border-black-500/20 hover:bg-gray-700/50 transition-colors"
+                    >
+                        <td className="px-6 py-3 font-medium">{item.id}</td>
+                        <td className="px-6 py-3">{item.name}</td>
+                        <td className="px-6 py-3">{item.description}</td>
+                        <th className="px-6 py-3">{item.is_done ? "Done" : "Pending"}</th>
+                    </tr>
+                    ))}
+                </tbody>
+                </table>
         </div>
     </Layout>
 }
