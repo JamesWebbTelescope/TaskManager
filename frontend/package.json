@@ -23,11 +23,11 @@
     "react-player": "^3.4.0",
     "react-router-dom": "^7.9.6",
     "react-youtube": "^10.1.0",
-    "tailwindcss": "^4.1.17"
+    "tailwindcss": "^4.2.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.1",
-    "@tailwindcss/vite": "^4.1.17",
+    "@tailwindcss/vite": "^4.2.0",
     "@types/node": "^24.10.0",
     "@types/react": "^19.2.2",
     "@types/react-dom": "^19.2.2",
