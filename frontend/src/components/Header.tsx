@@ -50,6 +50,19 @@ export default function Navbar() {
         >
         {}
         </button>
+        <a href="/admin" className={holoLinkClass}>
+          Admin
+        </a>
+        <button
+        onClick={() => {
+          navigate('/');
+        
+        }}
+         className={holoLinkClass}
+        >
+        {}
+        </button>
+
     </nav>
   );
 }
