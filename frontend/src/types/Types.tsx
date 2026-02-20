@@ -5,3 +5,9 @@ export interface Task {
   due_date: string;
   id: number;
 }
+
+export interface AdminUser{
+    id: number;
+    name: string;
+    password_hash: string;
+}
