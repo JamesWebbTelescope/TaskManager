@@ -32,17 +32,6 @@ export default function Navbar() {
   useEffect(() => {
 
     const fetchUser = async () => {
-      try {
-        /*const res = await fetch(`${API_URL}/api/auth/profile/me`, {
-          headers: { Authorization: `Bearer` },
-        });
-        if (res.ok) {
-          const data = await res.json();
-          setUserName(data.name);
-        }*/
-      } catch (err) {
-        console.error(err);
-      }
     };
     fetchUser();
   }, []);
