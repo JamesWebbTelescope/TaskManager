@@ -49,8 +49,8 @@ export default function LoginForm() {
 
 
   
-  const handleSubmit = () => {
-    // e.preventDefault();e: React.FormEvent
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
     sendLogin();
     
   };
@@ -81,6 +81,7 @@ export default function LoginForm() {
         </label>
         <br />
         <button>Login</button>
+          console.log("Login form submitted")
         </form>
       </div>
     )}
