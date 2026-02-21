@@ -25,10 +25,13 @@ export default function UserList() {
         try {
         const res = await fetch(`${API_URL}/api/auth/profile/`, {
           method: "GET",
-          headers: {         
+          headers: {   
+            "Content-Type": "application/json",      
             "Authorization": `Bearer ${token}`,
           },
-        });        
+        });
+        
+        console.log(`Response: ${res}`)
         
         if (!res.ok) {
             if (res.status === 401) {

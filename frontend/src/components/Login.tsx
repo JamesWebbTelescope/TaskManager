@@ -31,7 +31,7 @@ export default function LoginForm() {
           setToken(data.access_token);
           setTokenState(data.access_token);
           navigate("/admin"); 
-          console.log("Login successfull")
+          console.log("Login successful")
           
         } catch (error) {
           console.error("Login error:", error);
