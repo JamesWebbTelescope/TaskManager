@@ -28,7 +28,7 @@ export const createTask = async (url: string, task: Task) => {
         return null;
     }
     try {
-        const response = await fetch(`${url}/api/tasks`, {
+        const response = await fetch(`${url}/api/tasks/`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

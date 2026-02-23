@@ -43,7 +43,7 @@ def create_app():
         static_folder="..\\frontend\\dist",
         static_url_path="")
     app.wsgi_app = ProxyFix(app.wsgi_app) #Create the application
-    CORS(app, origins=ALLOWED_ORIGINS, supports_credentials=True, send_wildcard=True) 
+    CORS(app, origins=ALLOWED_ORIGINS, methods=["GET", "POST", "PUT", "DELETE"], supports_credentials=True, send_wildcard=True) 
 
     app.config["JWT_SECRET_KEY"] = config.jwt_token
     app.config["DEBUG"] = config.debug
