@@ -1,4 +1,5 @@
 import type { Task } from '../types/Types';
+import { getToken } from './authService';
 
 export const getTasks = async (url: string) => {
     try {   
@@ -17,5 +18,35 @@ export const getTasks = async (url: string) => {
 } catch (error) { 
         console.error("Error fetching tasks:", error);
         return [];
+    }
+}
+
+export const createTask = async (url: string, task: Task) => {
+    const token = getToken();
+    if (!token) {
+        console.warn("No token found. Cannot create task.");
+        return null;
+    }
+    try {
+        const response = await fetch(`${url}/api/tasks`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                "Authorization": `Bearer ${token}`,
+            },
+            body: JSON.stringify({  
+                name: task.name,
+                description: task.description,
+                completed: task.is_done
+            }),
+        });
+        if (!response.ok) {
+            throw new Error('Failed to create task');
+        }
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error("Error creating task:", error);
+        return null;
     }
 }
