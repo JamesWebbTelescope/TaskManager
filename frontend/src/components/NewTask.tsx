@@ -1,25 +1,19 @@
 import { useState, useEffect  } from 'react';
-import { setToken, getToken } from '../services/authService';
+import { getToken } from '../services/authService';
 import { useNavigate } from 'react-router-dom';
 import "./Newtask.css"
+import { createTask } from '../services/apiService';
 
 export default function NewTask() {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [due_date, setDueDate] = useState("");
-  const [is_done, setIsDone] = useState(false);
-  const [token, setTokenState] = useState<string | null>(getToken());  
+  const [is_done, setIsDone] = useState(false); 
   const API_URL = import.meta.env.VITE_API_URL;
   const navigate = useNavigate();
 
 
     const sendTask = async () => {
-      const token = getToken();
-      if (!token) {
-        console.warn("No token found. Redirecting to login...");
-        navigate("/admin");  
-        return;
-      }
       try {
           console.log("Sending task")
           const taskModel = {
@@ -30,17 +24,10 @@ export default function NewTask() {
               "id": 0
               
           }        
-          const res = await fetch(`${API_URL}/api/tasks`, {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-              "Authorization": `Bearer ${token}`,
-            },
-            body: JSON.stringify(taskModel),
-          });
+          const res = createTask(API_URL, taskModel);
           console.log(`Res: ${res}`)
         
-          const data = await res.json();          
+          const data = await res;          
           navigate("/"); 
           console.log("Task created successfully")
           
@@ -52,8 +39,9 @@ export default function NewTask() {
       
     useEffect(() => {
         
-        if (token) {
-          console.log("Token found, redirecting...");
+      const token = getToken();
+        if (!token) {
+          console.log("Token not found, redirecting...");
           navigate("/admin"); 
         }
       }, []);
@@ -63,6 +51,7 @@ export default function NewTask() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     sendTask();
+    console.log("New task form submitted")
     
   };
 
@@ -72,9 +61,9 @@ export default function NewTask() {
         <form onSubmit={handleSubmit}>
         <label>Task name:
           <input
-            name="username"
+            name="Name of the task"
             autoComplete="on"
-            placeholder="username"
+            placeholder="Task name"
             type="text"
             value={name}
             onChange={e => setName(e.target.value)}
@@ -83,8 +72,9 @@ export default function NewTask() {
         <br />
         <label>Description:
           <input
-            name="password"
-            autoComplete="off"
+            name="description"
+            autoComplete="on"
+            placeholder="Task description"
             type="text"
             value={description}
             onChange={e => setDescription(e.target.value)}
@@ -110,7 +100,6 @@ export default function NewTask() {
         </label>
         <br />
         <button>Create Task</button>
-          console.log("New task form submitted")
         </form>
       </div>
     )}
