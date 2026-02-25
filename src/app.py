@@ -13,11 +13,8 @@ List of allowed origins for the frontend
 '''
 ALLOWED_ORIGINS = [ 
     "http://localhost:5173",
-    "https://jameswebbtelescope.github.io",
-    "https://jameswebbtelescope.github.io/*",
-    "http://127.0.0.1:8000",
-    "http://127.0.0.1:8000/api/student",
-    "http://127.0.0.1:8000/api/tutorials",
+    "http://localhost:5173/",
+    "https://localhost:5173"
 ]
 
 
@@ -54,7 +51,7 @@ def create_app():
 
     # Create the endpoint to serve the frontpage
     @app.route("/")
-    @app.route("/#/tasks")
+    @app.route("/tasks")
     @app.route("/admin")
     def serve_react():  
         return send_from_directory(app.static_folder, 'index.html')
