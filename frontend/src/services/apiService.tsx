@@ -37,7 +37,9 @@ export const createTask = async (url: string, task: Task) => {
             body: JSON.stringify({  
                 name: task.name,
                 description: task.description,
-                completed: task.is_done
+                due_date: task.due_date,
+                is_done: task.is_done,
+                id: task.id
             }),
         });
         if (!response.ok) {
