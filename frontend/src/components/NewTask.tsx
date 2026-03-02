@@ -27,7 +27,7 @@ export default function NewTask() {
           const res = createTask(API_URL, taskModel);
           console.log(`Res: ${res}`)
         
-          const data = await res;          
+          //const data = await res;          
           navigate("/"); 
           console.log("Task created successfully")
           
