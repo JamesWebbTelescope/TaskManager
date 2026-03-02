@@ -1,11 +1,17 @@
 import Layout from "../components/Layout";
 import NewTask from "../components/NewTask";
 import TasksPage from "../components/TasksPage";
-import { getToken } from "../services/authService";
+import { clearToken, getToken } from "../services/authService";
 
 export default function Home() {
 
     const token = getToken()
+    if (!token) {
+        console.log("No token found, user is not logged in.");
+        clearToken();
+    } else {
+        console.log("Token found, user is logged in.");
+    }
 
 return (
     <Layout>
