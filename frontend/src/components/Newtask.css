@@ -1,5 +1,5 @@
 form {
-  max-width: 1000px;
+  max-width: 1200px;
   margin: 40px auto;
   padding: 20px;
   background-color: #f9f9f9;
@@ -11,8 +11,10 @@ form {
 label {
   display: block;
   margin-bottom: 15px;
+  margin-left: 5px;
   font-weight: bold;
   color: #333;
+  float: left;
 }
 
 input[type="text"],
@@ -20,7 +22,7 @@ input[type="description"],
 input[type="date"],
 input[type="checkbox"] {
   width: 100%;
-  padding: 10px;
+  padding: 20px;
   margin-top: 5px;
   border: 1px solid #ccc;
   border-radius: 4px;
@@ -38,6 +40,7 @@ button {
   font-size: 16px;
   cursor: pointer;
   margin-top: 10px;
+  float: left;
 }
 
 button:hover {
