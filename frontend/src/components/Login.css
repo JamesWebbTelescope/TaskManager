@@ -25,7 +25,6 @@ input[type="password"] {
   border-radius: 4px;
   box-sizing: border-box;
   font-size: 16px;
-  float: none;
 }
 
 button {
@@ -38,7 +37,6 @@ button {
   font-size: 16px;
   cursor: pointer;
   margin-top: 10px;
-  float: none;
 }
 
 button:hover {
