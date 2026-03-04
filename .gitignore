@@ -24,3 +24,5 @@ yarn-error.log*
 /frontend/node_modules/.bin
 /frontend/node_modules
 /config.json
+*/config.json
+"C:\Users\Viktor From\OneDrive\Dokumenter\PlatformIO\Projects\TaskManager\config.json"
