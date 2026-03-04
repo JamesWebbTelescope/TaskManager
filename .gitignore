@@ -24,7 +24,8 @@ yarn-error.log*
 config.json
 ./config.json
 ../config.json
-config.json
+/config.json
 *.json
 /frontend/node_modules/.bin
 /frontend/node_modules
+config.json
