@@ -35,7 +35,7 @@ export default function TasksPage() {
                             console.log(t.name)
                             console.log(t.description)
                             console.log(t.due_date)
-                            console.log(t.is_done)
+                            console.log(t.is_done.valueOf())
                             }
                     }           
                 setTaskData(results);
