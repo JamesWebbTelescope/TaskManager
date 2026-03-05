@@ -14,31 +14,12 @@ export default function TasksPage() {
     const [tasks, setTaskData] = useState<DisplayTask[]>([])
 
     const API_URL = import.meta.env.VITE_API_URL;
-    const results: DisplayTask[] = [];
 
     useEffect(() => {
             const fetchData = async () => {
                 const tasks = await getTasks(API_URL);
                 console.log("Welcome to the tutorials page")
-                for(const task of tasks){
-                    console.log(`Getting all tutorials`)
-                    const t = tasks.find(item => item.id === task.id);
-                    if(t){
-                        results.push({
-                                    name: t.name,
-                                    description: t.description,
-                                    due_date: t.due_date,
-                                    is_done: t.is_done,
-                                    id: t.id
-                                });
-                            console.log(t.id)
-                            console.log(t.name)
-                            console.log(t.description)
-                            console.log(t.due_date)
-                            console.log(t.is_done.valueOf())
-                            }
-                    }           
-                setTaskData(results);
+                setTaskData(tasks);
             };
             fetchData();
         }, []);
@@ -62,7 +43,7 @@ export default function TasksPage() {
                         <td className="px-6 py-3 font-medium">{item.id}</td>
                         <td className="px-6 py-3">{item.name}</td>
                         <td className="px-6 py-3">{item.description}</td>
-                        <th className="px-6 py-3">{item.is_done ? "Done" : "Pending"}</th>
+                        <th className="px-6 py-3">{item.is_done}</th>
                     </tr>
                     ))}
                 </tbody>
