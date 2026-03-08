@@ -1,3 +1,4 @@
+import DeleteTask from "../components/DeleteTask";
 import Header from "../components/Header";
 import Layout from "../components/Layout";
 import NewTask from "../components/NewTask";
@@ -29,6 +30,7 @@ return (
         </div>
         )}
         <TasksPage/>
+        {token && <DeleteTask/>}
         
     </Layout>
     );
