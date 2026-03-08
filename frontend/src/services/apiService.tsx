@@ -52,3 +52,31 @@ export const createTask = async (url: string, task: Task) => {
         return null;
     }
 }
+
+export const deleteTask = async (url: string, id: number) => {
+    const token = getToken();
+    if (!token) {
+        console.warn("No token found. Cannot delete task.");
+        return null;
+    }
+    try {
+        const response = await fetch(`${url}/api/tasks/`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                "Authorization": `Bearer ${token}`,
+            },
+            body: JSON.stringify({ 
+                id: id
+            }),
+        });
+        if (!response.ok) {
+            throw new Error('Failed to delete task');
+        }
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error("Error deleting task:", error);
+        return null;
+    }
+}
