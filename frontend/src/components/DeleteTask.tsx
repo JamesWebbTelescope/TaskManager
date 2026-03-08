@@ -2,37 +2,26 @@ import { useState, useEffect  } from 'react';
 import { getToken } from '../services/authService';
 import { useNavigate } from 'react-router-dom';
 import "./DeleteTask.css"
-import { createTask } from '../services/apiService';
+import { deleteTask } from '../services/apiService';
 
 export default function NewTask() {
-  const [name, setName] = useState("");
-  const [description, setDescription] = useState("");
-  const [due_date, setDueDate] = useState("");
-  const [is_done, setIsDone] = useState(false); 
+  const [id, setId] = useState("");
   const API_URL = import.meta.env.VITE_API_URL;
   const navigate = useNavigate();
 
 
-    const sendTask = async () => {
+    const delTask = async (id: number) => {
       try {
-          console.log("Sending task")
-          const taskModel = {
-              "name": name,
-              "description": description,
-              "due_date": due_date,
-              "is_done": is_done,
-              "id": 0
-              
-          }        
-          const res = createTask(API_URL, taskModel);
+          console.log("Deleting task")
+          const res = await deleteTask(API_URL, id);
           console.log(`Res: ${res}`)
         
           //const data = await res;          
           navigate("/"); 
-          console.log("Task created successfully")
+          console.log("Task deleted successfully")
           
         } catch (error) {
-          console.error("Task creation error:", error);
+          console.error("Task deletion error:", error);
         }
       };
 
@@ -50,8 +39,8 @@ export default function NewTask() {
   
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    sendTask();
-    console.log("New task form submitted")
+    delTask(parseInt(id));
+    console.log("Delete task form submitted")
     
   };
 
@@ -59,47 +48,17 @@ export default function NewTask() {
   return (
       <div>
         <form onSubmit={handleSubmit}>
-        <label>Task name:
+        <label>ID:
           <input
-            name="Name of the task"
+            name="ID"
             autoComplete="on"
-            placeholder="Task name"
-            type="text"
-            value={name}
-            onChange={e => setName(e.target.value)}
+            placeholder="Task ID"
+            type="number"
+            value={id}
+            onChange={e => setId(e.target.value)}
           />
         </label>
-        <br />
-        <label>Description:
-          <input
-            name="description"
-            autoComplete="on"
-            placeholder="Task description"
-            type="text"
-            value={description}
-            onChange={e => setDescription(e.target.value)}
-          />
-        </label>
-        <br />
-        <label>Due Date:
-          <input
-            name="due_date"
-            type="date"
-            value={due_date}
-            onChange={e => setDueDate(e.target.value)}
-          />
-        </label>
-        <br />
-        <label>Is Done:
-          <input
-            name="is_done"
-            type="checkbox"
-            checked={is_done}
-            onChange={e => setIsDone(e.target.checked)}
-          />
-        </label>
-        <br />
-        <button>Create Task</button>
+        <button>Delete Task</button>
         </form>
       </div>
     )}
