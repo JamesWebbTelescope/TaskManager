@@ -61,7 +61,7 @@ export const deleteTask = async (url: string, id: number) => {
     }
     try {
         const response = await fetch(`${url}/api/tasks/`, {
-            method: 'POST',
+            method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
                 "Authorization": `Bearer ${token}`,
