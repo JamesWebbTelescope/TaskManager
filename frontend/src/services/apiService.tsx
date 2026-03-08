@@ -53,7 +53,7 @@ export const createTask = async (url: string, task: Task) => {
     }
 }
 
-export const deleteTask = async (url: string, id: number) => {
+export const deleteTask = async (url: string, id: string) => {
     const token = getToken();
     if (!token) {
         console.warn("No token found. Cannot delete task.");

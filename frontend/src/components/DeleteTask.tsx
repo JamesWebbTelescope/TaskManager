@@ -10,7 +10,7 @@ export default function NewTask() {
   const navigate = useNavigate();
 
 
-    const removeTask = async (id: number) => {
+    const removeTask = async (id: string) => {
       try {
           console.log("Deleting task")
           const res = await deleteTask(API_URL, id);
@@ -39,8 +39,8 @@ export default function NewTask() {
   
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log(`Deleting task with ID: ${parseInt(id)}`);
-    removeTask(parseInt(id));
+    console.log(`Deleting task with ID: ${id}`);
+    removeTask(id);
     console.log("Delete task form submitted")
     
   };
