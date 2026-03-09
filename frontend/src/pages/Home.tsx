@@ -1,19 +1,15 @@
+import authenticate from "../components/AuthUser";
 import DeleteTask from "../components/DeleteTask";
 import Header from "../components/Header";
 import Layout from "../components/Layout";
 import NewTask from "../components/NewTask";
 import TasksPage from "../components/TasksPage";
-import { clearToken, getToken } from "../services/authService";
+import { getToken } from "../services/authService";
 
 export default function Home() {
 
+    authenticate();
     const token = getToken()
-    if (!token) {
-        console.log("No token found, user is not logged in.");
-        clearToken();
-    } else {
-        console.log("Token found, user is logged in.");
-    }
 
 return (
     <Layout>
