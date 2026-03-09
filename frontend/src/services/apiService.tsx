@@ -67,11 +67,7 @@ export const deleteTask = async (url: string, task: Task) => {
                 "Authorization": `Bearer ${token}`,
             },
             body: JSON.stringify({ 
-                name: task.name,
-                description: task.description,
-                due_date: task.due_date,
-                is_done: task.is_done,
-                id: task.id
+                "ID": task.id
             }),
         });
         if (!response.ok) {
