@@ -18,7 +18,7 @@ export default function NewTask() {
               "name": "",
               "description": "",
               "due_date": "",
-              "is_done": false,
+              "is_done": "false",
               "id": parseInt(id)
           }
           const res = await deleteTask(API_URL, taskModel);

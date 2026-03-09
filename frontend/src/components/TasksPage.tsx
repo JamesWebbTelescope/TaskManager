@@ -6,7 +6,7 @@ interface DisplayTask {
     name: string;
     description: string;
     due_date: string;
-    is_done: boolean;
+    is_done: string;
     id: number;
 }
 

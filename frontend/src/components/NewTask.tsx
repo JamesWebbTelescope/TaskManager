@@ -8,7 +8,7 @@ export default function NewTask() {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [due_date, setDueDate] = useState("");
-  const [is_done, setIsDone] = useState(false); 
+  const [is_done, setIsDone] = useState("false"); 
   const API_URL = import.meta.env.VITE_API_URL;
   const navigate = useNavigate();
 
@@ -94,8 +94,8 @@ export default function NewTask() {
           <input
             name="is_done"
             type="checkbox"
-            checked={is_done}
-            onChange={e => setIsDone(e.target.checked)}
+            checked={is_done === "true"}
+            onChange={e => setIsDone(e.target.checked ? "true" : "false")}
           />
         </label>
         <br />
