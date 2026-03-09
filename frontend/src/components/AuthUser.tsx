@@ -6,7 +6,7 @@ export default async function authenticate() {
     const token = getToken()    
     
     if (!token) {
-        console.warn("No token found. Redirecting to login...");
+        console.warn("No token found.");
         clearToken();            
         return;
     }
