@@ -43,7 +43,7 @@ export default function TasksPage() {
                         <td className="px-6 py-3 font-medium">{item.id}</td>
                         <td className="px-6 py-3">{item.name}</td>
                         <td className="px-6 py-3">{item.description}</td>
-                        <td className="px-6 py-3">{item.is_done}</td>
+                        <td className="px-6 py-3">{((item.is_done === "true") && (item.is_done.length > 1)) ? "Done" : "Not Done"}</td>
                     </tr>
                     ))}
                 </tbody>
