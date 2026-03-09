@@ -53,7 +53,7 @@ export const createTask = async (url: string, task: Task) => {
     }
 }
 
-export const deleteTask = async (url: string, task_id: string) => {
+export const deleteTask = async (url: string, task: Task) => {
     const token = getToken();
     if (!token) {
         console.warn("No token found. Cannot delete task.");
@@ -67,7 +67,7 @@ export const deleteTask = async (url: string, task_id: string) => {
                 "Authorization": `Bearer ${token}`,
             },
             body: JSON.stringify({ 
-                id: task_id
+                id: task.id
             }),
         });
         if (!response.ok) {

@@ -1,6 +1,7 @@
 import { useState, useEffect  } from 'react';
 import { getToken } from '../services/authService';
 import { useNavigate } from 'react-router-dom';
+import type { Task } from '../types/Types';
 import "./DeleteTask.css"
 import { deleteTask } from '../services/apiService';
 
@@ -13,7 +14,14 @@ export default function NewTask() {
     const removeTask = async (id: string) => {
       try {
           console.log("Deleting task")
-          const res = await deleteTask(API_URL, id);
+          const taskModel: Task = {
+              "name": "",
+              "description": "",
+              "due_date": "",
+              "is_done": false,
+              "id": parseInt(id)
+          }
+          const res = await deleteTask(API_URL, taskModel);
           console.log(`Res: ${res}`)
         
           //const data = await res;          
