@@ -12,7 +12,12 @@ export const getTasks = async (url: string) => {
                 task.description = data[i].description;
                 task.is_done = data[i].is_done;
                 task.id = data[i].id;
-                tasks.push(task);
+                if (task.name == "" && task.description == "" && task.due_date == "") {
+                        console.warn(`Task with ID ${task.id} has been deleted. Skipping.`)
+                    }
+                else {
+                    tasks.push(task);
+                }
             }
             return Array.isArray(tasks) ? tasks: []
 } catch (error) { 
