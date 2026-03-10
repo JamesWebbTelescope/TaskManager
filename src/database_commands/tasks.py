@@ -24,6 +24,24 @@ class TaskModel:
         except Exception as e:
             print("Error getting all tasks", e) #If anything goes wrong, print the error
             return False
+    
+    def GetByID(self, ID):
+        '''
+        Docstring for GetByID
+        
+        :param ID: ID of the tutorial that you want to get
+        '''
+        try:
+            conn = self.db.get_connection() #Open a connection to the database
+            with conn.cursor() as cursor: #Open a cursor for the connection
+                cursor.execute(f"SELECT * FROM tasks WHERE id = {ID}") #Find the task with the given ID
+                myresult = cursor.fetchall() #Get the response
+                if len(myresult) == 0: #If there is no task with the given ID, return False
+                    return False
+                return TaskModel._TupleToDict(myresult[0]) #Return the response as a tuple
+        except Exception as e:
+            print("Error getting task by ID", e) #If anything goes wrong, print the error
+            return False
         
     def Create(self, name, description, due_date, is_done):
         '''
