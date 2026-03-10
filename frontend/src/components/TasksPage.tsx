@@ -43,7 +43,11 @@ export default function TasksPage() {
                         <td className="px-6 py-3 font-medium">{item.id}</td>
                         <td className="px-6 py-3">{item.name}</td>
                         <td className="px-6 py-3">{item.description}</td>
-                        <td className="px-6 py-3">{((item.is_done === "true") && (item.is_done.length > 1)) ? "Done" : "Not Done"}</td>
+                        <td className="px-6 py-3">{((item.is_done === "true") && (item.is_done.length > 1)) ? (
+                            <div className="bg-green-500 text-white px-2 py-1 rounded">Done</div>
+                        ) : (
+                            <div className="bg-red-500 text-white px-2 py-1 rounded">Not Done</div>
+                        )}</td>
                     </tr>
                     ))}
                 </tbody>
