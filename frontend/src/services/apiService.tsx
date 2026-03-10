@@ -110,3 +110,35 @@ export const getTaskById = async (url: string, task: Task) => {
         return null;
     }
 }
+
+export const updateTask = async (url: string, task: Task) => {
+    const token = getToken();   
+    if (!token) {
+        console.warn("No token found. Cannot update task.");
+        return null;
+    }
+    try {
+        const response = await fetch(`${url}/api/tasks/`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                "Authorization": `Bearer ${token}`,
+            },
+            body: JSON.stringify({  
+                name: task.name,
+                description: task.description,
+                due_date: task.due_date,
+                is_done: task.is_done,
+                id: task.id
+            }),
+        });
+        if (!response.ok) {
+            throw new Error('Failed to update task');
+        }
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error("Error updating task:", error);
+        return null;
+    }
+}
