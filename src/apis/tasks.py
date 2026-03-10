@@ -57,6 +57,7 @@ def create_api_tasks(db_manager):
     @api.route("/<int:ID>")
     class Task(Resource):
 
+        @jwt_required()
         @api.doc("Get task by ID")
         def get(self, ID):
             task = db_manager.tasks.GetByID(ID)
