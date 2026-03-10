@@ -54,6 +54,16 @@ def create_api_tasks(db_manager):
             tasks = db_manager.tasks.Delete(ID)
             return tasks, 200
 
+    @api.route("/<int:ID>")
+    class Task(Resource):
+
+        @api.doc("Get task by ID")
+        def get(self, ID):
+            task = db_manager.tasks.GetByID(ID)
+            if task:
+                return task, 200
+            else:
+                return {"message": "Task not found"}, 404
         
     return api
 
