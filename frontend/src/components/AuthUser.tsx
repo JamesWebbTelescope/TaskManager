@@ -1,9 +1,11 @@
+import { useNavigate } from "react-router";
 import { clearToken, getToken } from "../services/authService";
 
 
 export default async function authenticate() {
     const API_URL = import.meta.env.VITE_API_URL;
-    const token = getToken()    
+    const token = getToken()  
+    const navigate = useNavigate();  
     
     if (!token) {
         console.warn("No token found.");
@@ -25,6 +27,7 @@ export default async function authenticate() {
             // Token is invalid or expired
             console.warn("Token expired or invalid. Clearing token...");
             clearToken();
+            navigate("/");
         }
         throw new Error(`Request failed with status ${res.status}`);
     }
