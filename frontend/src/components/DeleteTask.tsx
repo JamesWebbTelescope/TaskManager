@@ -3,7 +3,7 @@ import { getToken } from '../services/authService';
 import { useNavigate } from 'react-router-dom';
 import type { Task } from '../types/Types';
 import "./DeleteTask.css"
-import { deleteTask } from '../services/apiService';
+import { deleteTask, getTaskById } from '../services/apiService';
 
 export default function NewTask() {
   const [id, setId] = useState("");
@@ -21,12 +21,20 @@ export default function NewTask() {
               "is_done": "false",
               "id": parseInt(id)
           }
-          const res = await deleteTask(API_URL, taskModel);
-          console.log(`Res: ${res}`)
+
+          const taskExist = await getTaskById(API_URL, taskModel);
+          if (!taskExist) {
+            console.warn(`Task with ID ${id} does not exist. Cannot delete.`);
+            return;
+          }
+          else {
+            const res = await deleteTask(API_URL, taskModel);
+            console.log(`Res: ${res}`)
         
-          //const data = await res;          
-          navigate("/"); 
-          console.log("Task deleted successfully")
+            //const data = await res;          
+            navigate("/"); 
+            console.log("Task deleted successfully")
+          }
           
         } catch (error) {
           console.error("Task deletion error:", error);
