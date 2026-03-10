@@ -3,7 +3,7 @@ import { getToken } from '../services/authService';
 import { useNavigate } from 'react-router-dom';
 import type { Task } from '../types/Types';
 import "./UpdateTask.css"
-import { deleteTask, getTaskById } from '../services/apiService';
+import { getTaskById, updateTask } from '../services/apiService';
 
 export default function NewTask() {
   const [id, setId] = useState("");
@@ -32,16 +32,16 @@ export default function NewTask() {
             return;
           }
           else {
-            const res = await deleteTask(API_URL, taskModel);
+            const res = await updateTask(API_URL, taskModel);
             console.log(`Res: ${res}`)
         
             //const data = await res;          
             navigate("/"); 
-            console.log("Task deleted successfully")
+            console.log("Task updated successfully")
           }
           
         } catch (error) {
-          console.error("Task deletion error:", error);
+          console.error("Task update error:", error);
         }
       };
 
