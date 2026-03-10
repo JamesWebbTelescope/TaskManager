@@ -80,3 +80,28 @@ export const deleteTask = async (url: string, task: Task) => {
         return null;
     }
 }
+
+export const getTaskById = async (url: string, task: Task) => {
+    const token = getToken();
+    if (!token) {
+        console.warn("No token found. Cannot fetch task.");
+        return null;
+    }
+    try {
+        const response = await fetch(`${url}/api/tasks/${task.id}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                "Authorization": `Bearer ${token}`,
+            },
+        });
+        if (!response.ok) {
+            throw new Error('Failed to fetch task');
+        }
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error("Error fetching task:", error);
+        return null;
+    }
+}
