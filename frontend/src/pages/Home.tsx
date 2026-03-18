@@ -4,6 +4,7 @@ import Header from "../components/Header";
 import Layout from "../components/Layout";
 import NewTask from "../components/NewTask";
 import TasksPage from "../components/TasksPage";
+import UpdateTask from "../components/UpdateTask";
 import { getToken } from "../services/authService";
 
 export default function Home() {
@@ -27,6 +28,7 @@ return (
         )}
         <TasksPage/>
         {token && <DeleteTask/>}
+        {token && <UpdateTask/>}
         
     </Layout>
     );

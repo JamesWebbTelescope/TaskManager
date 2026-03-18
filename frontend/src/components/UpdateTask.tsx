@@ -104,7 +104,7 @@ export default function NewTask() {
             name="id"
             autoComplete="on"
             placeholder="Task ID"
-            type="text"
+            type="number"
             value={id}
             onChange={e => setId(e.target.value)}
           />

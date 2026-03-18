@@ -129,7 +129,7 @@ export const updateTask = async (url: string, task: Task) => {
                 description: task.description,
                 due_date: task.due_date,
                 is_done: task.is_done,
-                id: task.id
+                "ID": task.id
             }),
         });
         if (!response.ok) {
